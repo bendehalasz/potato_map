@@ -36,7 +36,7 @@ const landTypes = [
     { name: 'mountain', color: 'SaddleBrown', number: -1 },
     { name: 'water', color: 'SkyBlue', number: 1 },
     { name: 'forest', color: 'SeaGreen', number: 2 },
-    { name: 'farm', color: 'Gold', number: 3 },
+    { name: 'town', color: 'Gold', number: 3 },
     { name: 'town', color: 'FireBrick', number: 4 },
 ];
 
@@ -542,7 +542,7 @@ class GameElements {
         },
         {
             time: 2,
-            type: 'farm',
+            type: 'town',
             shape: [[1,1,1],
                     [0,0,1],
                     [0,0,0]],
@@ -569,7 +569,7 @@ class GameElements {
         },
         {
             time: 2,
-            type: 'farm',
+            type: 'town',
             shape: [[1,1,1],
                     [0,1,0],
                     [0,0,0]],
@@ -596,7 +596,7 @@ class GameElements {
         },
         {
             time: 1,
-            type: 'farm',
+            type: 'town',
             shape: [[1,1,0],
                     [0,1,1],
                     [0,0,0]],
@@ -605,7 +605,7 @@ class GameElements {
         },
         {
             time: 1,
-            type: 'farm',
+            type: 'town',
             shape: [[0,1,0],
                     [1,1,1],
                     [0,1,0]],
@@ -696,7 +696,7 @@ class GameElements {
     },
     {
       "title": "Öntözőcsatorna",
-      "description": "Minden olyan oszlopodért, amelyben a farm illetve a vízmezők száma megegyezik, négy-négy pontot kapsz. Mindkét tereptípusból legalább egy-egy mezőnek lennie kell az oszlopban ahhoz, hogy pontot kaphass érte.",
+      "description": "Minden olyan oszlopodért, amelyben a town illetve a vízmezők száma megegyezik, négy-négy pontot kapsz. Mindkét tereptípusból legalább egy-egy mezőnek lennie kell az oszlopban ahhoz, hogy pontot kaphass érte.",
       "function": countOntozocsatorna
     },
     {
@@ -819,9 +819,26 @@ function countKrumpliOntozes()
         {
             if(gameTable[i][j] === "water")
             {
-                if(gameTable[i-1][j] === "farm" || gameTable[i+1][j] === "farm" || gameTable[i][j-1] === "farm" || gameTable[i][j+1] === "farm")
+                let farm = false
+                if(i-1 >= 0)
                 {
-                    points+= 2;
+                    if(gameTable[i-1][j] === "farm") farm = true
+                }
+                if(i+1 < gameTable.length)
+                {
+                    if(gameTable[i+1][j] === "farm") farm = true
+                }
+                if(j-1 >= 0)
+                {
+                    if(gameTable[i][j-1] === "farm") farm = true
+                }
+                if(j+1 < gameTable.length)
+                {
+                    if(gameTable[i][j+1] === "farm") farm = true
+                }
+                if(farm)
+                {
+                    points += 2;
                 }  
             }
             
@@ -953,7 +970,7 @@ function countOntozocsatorna()
         water_count = 0;
         for(let j = 0; j < gameTable.length; j++)
         {
-            if(gameTable[j][i] === "farm")
+            if(gameTable[j][i] === "town")
             {
                 farm_count += 1;
             }
@@ -982,10 +999,28 @@ function countMagusokVolgye()
         {
             if(gameTable[i][j] === "water")
             {
-                if(gameTable[i-1][j] === "mountain" || gameTable[i+1][j] === "mountain" || gameTable[i][j-1] === "mountain" || gameTable[i][j+1] === "mountain")
+                let mountain = false
+                if(i-1 >= 0)
                 {
-                    points+= 3;
+                    if(gameTable[i-1][j] === "mountain") mountain = true
+                }
+                if(i+1 < gameTable.length)
+                {
+                    if(gameTable[i+1][j] === "mountain") mountain = true
+                }
+                if(j-1 >= 0)
+                {
+                    if(gameTable[i][j-1] === "mountain") mountain = true
+                }
+                if(j+1 < gameTable.length)
+                {
+                    if(gameTable[i][j+1] === "mountain") mountain = true
+                }
+                if(mountain)
+                {
+                    points += 3;
                 }  
+
             }
             
         }
@@ -1003,10 +1038,27 @@ function countUresTelek()
         {
             if(gameTable[i][j] === "empty")
             {
-                if(gameTable[i-1][j] === "town" || gameTable[i+1][j] === "town" || gameTable[i][j-1] === "town" || gameTable[i][j+1] === "town")
+                let town = false
+                if(i-1 >= 0)
                 {
-                    points+= 2;
-                }  
+                    if(gameTable[i-1][j] === "town") town = true
+                }
+                if(i+1 < gameTable.length)
+                {
+                    if(gameTable[i+1][j] === "town") town = true
+                }
+                if(j-1 >= 0)
+                {
+                    if(gameTable[i][j-1] === "town") town = true
+                }
+                if(j+1 < gameTable.length)
+                {
+                    if(gameTable[i][j+1] === "town") town = true
+                }
+                if(town)
+                {
+                    points += 2;
+                }   
             }
             
         }
