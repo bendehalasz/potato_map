@@ -36,7 +36,7 @@ const landTypes = [
     { name: 'mountain', color: 'SaddleBrown', number: -1 },
     { name: 'water', color: 'SkyBlue', number: 1 },
     { name: 'forest', color: 'SeaGreen', number: 2 },
-    { name: 'town', color: 'Gold', number: 3 },
+    { name: 'farm', color: 'Gold', number: 3 },
     { name: 'town', color: 'FireBrick', number: 4 },
 ];
 
@@ -542,7 +542,7 @@ class GameElements {
         },
         {
             time: 2,
-            type: 'town',
+            type: 'farm',
             shape: [[1,1,1],
                     [0,0,1],
                     [0,0,0]],
@@ -569,7 +569,7 @@ class GameElements {
         },
         {
             time: 2,
-            type: 'town',
+            type: 'farm',
             shape: [[1,1,1],
                     [0,1,0],
                     [0,0,0]],
@@ -596,7 +596,7 @@ class GameElements {
         },
         {
             time: 1,
-            type: 'town',
+            type: 'farm',
             shape: [[1,1,0],
                     [0,1,1],
                     [0,0,0]],
@@ -605,7 +605,7 @@ class GameElements {
         },
         {
             time: 1,
-            type: 'town',
+            type: 'farm',
             shape: [[0,1,0],
                     [1,1,1],
                     [0,1,0]],
@@ -696,7 +696,7 @@ class GameElements {
     },
     {
       "title": "Öntözőcsatorna",
-      "description": "Minden olyan oszlopodért, amelyben a town illetve a vízmezők száma megegyezik, négy-négy pontot kapsz. Mindkét tereptípusból legalább egy-egy mezőnek lennie kell az oszlopban ahhoz, hogy pontot kaphass érte.",
+      "description": "Minden olyan oszlopodért, amelyben a farm illetve a vízmezők száma megegyezik, négy-négy pontot kapsz. Mindkét tereptípusból legalább egy-egy mezőnek lennie kell az oszlopban ahhoz, hogy pontot kaphass érte.",
       "function": countOntozocsatorna
     },
     {
@@ -970,7 +970,7 @@ function countOntozocsatorna()
         water_count = 0;
         for(let j = 0; j < gameTable.length; j++)
         {
-            if(gameTable[j][i] === "town")
+            if(gameTable[j][i] === "farm")
             {
                 farm_count += 1;
             }
